@@ -2,6 +2,7 @@ package app.fahmi.affanafahmi.aparoksha17;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Vibrator;
@@ -64,8 +65,7 @@ public class main extends AppCompatActivity {
 
     }
 
-    public void animate(View view) {
-        view.setEnabled(false);
+    public void animate(View view) throws InterruptedException {
         ImageView animationTarget = (ImageView) this.findViewById(R.id.testImage);
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.logo);
@@ -87,7 +87,7 @@ public class main extends AppCompatActivity {
 
         // Vibrate for 200 milliseconds
         v.vibrate(200);
-
+        main.this.startActivity((new Intent(main.this, my_wallet.class)));
 
     }
 
