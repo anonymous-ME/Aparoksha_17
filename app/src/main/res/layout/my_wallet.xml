@@ -10,11 +10,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/bg"
-    tools:context="app.fahmi.affanafahmi.aparoksha17.my_wallet">
+    tools:context="app.fahmi.affanafahmi.aparoksha17.activities.Wallet">
 
 
     <Button
         android:text="REFILL"
+        android:onClick="refill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -29,6 +30,7 @@
     <Button
         android:text="PAY FOR THE EVENT"
         android:backgroundTint="@color/colorPrimary"
+        android:onClick="pay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"

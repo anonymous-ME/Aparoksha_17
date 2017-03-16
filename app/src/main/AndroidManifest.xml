@@ -3,6 +3,7 @@
     package="app.fahmi.affanafahmi.aparoksha17">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -10,14 +11,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main">
+        <activity android:name=".activities.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".my_wallet"></activity>
+        <activity android:name=".activities.Wallet" />
+        <activity
+            android:parentActivityName=".activities.Wallet"
+            android:name=".utils.CodeScaner" />
+        <activity android:name=".activities.PayID"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.EntryPass"
+            android:screenOrientation="landscape"
+            ></activity>
+
+        <activity android:name=".activities.SignUP"></activity>
     </application>
 
 </manifest>

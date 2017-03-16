@@ -1,0 +1,94 @@
+{
+  "project_info": {
+    "project_number": "833490355838",
+    "firebase_url": "https://aparoksha-2017.firebaseio.com",
+    "project_id": "aparoksha-2017",
+    "storage_bucket": "aparoksha-2017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833490355838:android:538732d54fd0a0b5",
+        "android_client_info": {
+          "package_name": "com.betterclever.aparoksha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833490355838-d15kdg83ml5e5edo95um8pp8cp657uo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.betterclever.aparoksha",
+            "certificate_hash": "fd88103cb0d891e02df7d9182809146694e1d977"
+          }
+        },
+        {
+          "client_id": "833490355838-nrr7et9hshlu0fmkd152hqum6vo65m4q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.betterclever.aparoksha",
+            "certificate_hash": "43afd5907d7e5a2ad28bdedf4390af8cb3a51890"
+          }
+        },
+        {
+          "client_id": "833490355838-mic4raq70g4lm82i6pggsh2v17oou096.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAacDkpHqdJLUOijY7_lZMzvGPeFf9glOo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833490355838-mic4raq70g4lm82i6pggsh2v17oou096.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833490355838:android:78266a69b1e424d4",
+        "android_client_info": {
+          "package_name": "app.fahmi.affanafahmi.aparoksha17"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833490355838-mic4raq70g4lm82i6pggsh2v17oou096.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAacDkpHqdJLUOijY7_lZMzvGPeFf9glOo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
