@@ -45,6 +45,13 @@ public class SignUP extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null)
+            if(user.isEmailVerified()){
+                Intent intent = new Intent(SignUP.this, Wallet.class);
+                startActivity(intent);
+            }
+
         progressdialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_DARK);
         progressdialog.setMessage("Please Wait....");
         progressdialog.setTitle("Registering You");
@@ -100,6 +107,7 @@ public class SignUP extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(SignUP.this, "Signup successful. Verification email sent.", Toast.LENGTH_SHORT).show();
+                                progressdialog.hide();
                                 Intent intent = new Intent(SignUP.this, Login.class);
                                 startActivity(intent);
                             }
@@ -124,7 +132,7 @@ public class SignUP extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    User user = new User(name, mail, mobile, 0.0, true);
+                                    User user = new User(name, mail, mobile, 30.0, true);
                                     mDatabase.child(task.getResult().getUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -135,7 +143,7 @@ public class SignUP extends AppCompatActivity {
                                                 //Remove user
                                                 Toast.makeText(getApplicationContext(), "Sorry unable to register you!!", Toast.LENGTH_LONG).show();
                                             }
-                                            progressdialog.hide();
+
                                         }
                                     });
                                 } else {
@@ -155,13 +163,11 @@ public class SignUP extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 sendVerificationEmail();
-                                                Toast.makeText(getApplicationContext(), "Registration was successful!!", Toast.LENGTH_LONG).show();
                                             }else {
                                                 //TODO
                                                 //Remove user
                                                 Toast.makeText(getApplicationContext(), "Sorry unable to register you!!", Toast.LENGTH_LONG).show();
                                             }
-                                            progressdialog.hide();
                                         }
                                     });
                                 } else {
@@ -179,5 +185,16 @@ public class SignUP extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(), "Password is too short, minimum 6 characters required !!", Toast.LENGTH_LONG).show();
         }
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null)
+            if(user.isEmailVerified()){
+                Intent intent = new Intent(SignUP.this, Wallet.class);
+                startActivity(intent);
+            }
     }
 }

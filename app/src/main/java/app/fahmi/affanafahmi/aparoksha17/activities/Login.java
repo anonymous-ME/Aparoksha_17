@@ -3,10 +3,12 @@ package app.fahmi.affanafahmi.aparoksha17.activities;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import app.fahmi.affanafahmi.aparoksha17.R;
 
@@ -44,6 +47,25 @@ public class Login extends AppCompatActivity {
 
         passwd = (EditText) findViewById(R.id.editTextPassword);
         email = (EditText) findViewById(R.id.editTextEmail);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null)
+            if(user.isEmailVerified()){
+                Intent intent = new Intent(Login.this, Wallet.class);
+                startActivity(intent);
+            }
+
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null)
+            if(user.isEmailVerified()){
+            Intent intent = new Intent(Login.this, Wallet.class);
+            startActivity(intent);
+            }
     }
 
     Boolean isValidEmail(String email){
@@ -95,18 +117,22 @@ public class Login extends AppCompatActivity {
     }
 
     public void forgot(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
         builder.setTitle("Password Recovery");
         builder.setMessage("Enter your email address and we'll send you a recovery link.");
+
+
         final EditText input = new EditText(this);
+
 
         input.setHint("Enter your email.");
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
-
+        input.setTextColor(Color.WHITE);
         builder.setView(input);
         builder.setPositiveButton("RESET", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 if(isValidEmail(input.getText().toString())) {
                     mAuth.sendPasswordResetEmail(input.getText().toString());
                     Toast.makeText(getApplicationContext(),"We’ve sent you a recovery link.", Toast.LENGTH_LONG).show();

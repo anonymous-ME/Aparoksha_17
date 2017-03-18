@@ -20,7 +20,7 @@ public class Permission {
     public static final int ACCOUNTS = 0x6;
     public static final int GPS_SETTINGS = 0x7;
 
-    public boolean isPermissionGranted(Context context,int TYPE) {
+    private static boolean isPermissionGranted(Context context,int TYPE) {
         switch (TYPE) {
             case LOCATION : if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                                 return true;
@@ -54,7 +54,7 @@ public class Permission {
                 return false;
         }
     }
-    public void requestPermission(Context context,int TYPE) {
+    public static void requestPermission(Context context,int TYPE) {
         switch (TYPE) {
             case LOCATION : if (!isPermissionGranted(context,TYPE))
                 ActivityCompat.requestPermissions((Activity) context,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);

@@ -1,25 +1,20 @@
-package app.fahmi.affanafahmi.aparoksha17.adapters;
+package app.fahmi.affanafahmi.aparoksha17.viewholder;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 import app.fahmi.affanafahmi.aparoksha17.R;
 import app.fahmi.affanafahmi.aparoksha17.activities.EntryPass;
-import app.fahmi.affanafahmi.aparoksha17.model.Ticket;
 
 
 /**
  * Created by Affan A. Fahmi on 19-12-2016.
  */
+/*
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder> {
 
 
@@ -46,8 +41,8 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     @Override public int getItemCount() {
         return items.size();
     }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder
+*/
+    public  class ViewHolder extends RecyclerView.ViewHolder
 
     {
         public TextView event_name;
@@ -72,4 +67,4 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
             });
         }
     }
-}
+//}

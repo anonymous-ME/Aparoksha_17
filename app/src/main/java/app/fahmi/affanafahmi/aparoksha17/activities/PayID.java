@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -26,7 +28,8 @@ public class PayID extends AppCompatActivity {
         setTitle("REFILL");
         ImageView imageView = (ImageView) findViewById(R.id.refill_id);
         try {
-            Bitmap bitmap = encodeAsBitmap("TEST");
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            Bitmap bitmap = encodeAsBitmap(user.getUid());
             imageView.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
