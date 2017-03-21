@@ -19,8 +19,12 @@ public class SendSMS {
 
             try {
                 // Construct data
+                String c = "riv5tvU4SRGW";
+                String b = "-tt8pxoQcLH";
+                String a = "e/2A9jDvHRk";
+                String d = "j3Y1qIui";
                 String user = "username=" + URLEncoder.encode("aparoksha.dev@gmail.com", "UTF-8");
-                String hash = "&apikey=" + URLEncoder.encode("e/2A9jDvHRk-Bc9C482auCgr71RFIC4Ycx8JS2teGw", "UTF-8");
+                String hash = "&apikey=" + URLEncoder.encode(a+b+c+d, "UTF-8");
                 String message = "&message=" + URLEncoder.encode(usr_name+" is now registered for the event "+event_name+". Paid "+amt+ " INR", "UTF-8");
                 String sender = "&sender=" + URLEncoder.encode("IIITA PAY", "UTF-8");
                 String numbers = "&numbers=" + URLEncoder.encode(num, "UTF-8");

@@ -42,6 +42,7 @@ public class Login extends AppCompatActivity {
         progressdialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_DARK);
         progressdialog.setMessage("Please Wait....");
         progressdialog.setTitle("Signing In");
+        progressdialog.setCancelable(false);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -120,12 +121,13 @@ public class Login extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
         builder.setTitle("Password Recovery");
         builder.setMessage("Enter your email address and we'll send you a recovery link.");
-
+        builder.setCancelable(false);
 
         final EditText input = new EditText(this);
 
 
         input.setHint("Enter your email.");
+        input.setHintTextColor(getResources().getColor(R.color.whiteS));
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
         input.setTextColor(Color.WHITE);
         builder.setView(input);
@@ -148,5 +150,27 @@ public class Login extends AppCompatActivity {
         });
 
         builder.show();
+    }
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom))
+                .setCancelable(false)
+                .setTitle("Exit")
+                .setMessage("Would you like to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // logout
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // user doesn't want to logout
+                    }
+                })
+                .show();
     }
 }

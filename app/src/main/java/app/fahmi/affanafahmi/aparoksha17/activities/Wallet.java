@@ -1,9 +1,12 @@
 package app.fahmi.affanafahmi.aparoksha17.activities;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -26,7 +29,7 @@ import java.text.SimpleDateFormat;
 
 import app.fahmi.affanafahmi.aparoksha17.R;
 import app.fahmi.affanafahmi.aparoksha17.model.Ticket;
-import app.fahmi.affanafahmi.aparoksha17.utils.CodeScaner;
+import app.fahmi.affanafahmi.aparoksha17.utils.CodeScanner;
 import app.fahmi.affanafahmi.aparoksha17.viewholder.ViewHolder;
 
 public class Wallet extends AppCompatActivity {
@@ -48,6 +51,7 @@ public class Wallet extends AppCompatActivity {
 
 
         final ProgressDialog Dialog = new ProgressDialog(Wallet.this,ProgressDialog.THEME_HOLO_DARK);
+        //Dialog.setCancelable(false);
         Dialog.setMessage("Loading your wallet...");
         Dialog.show();
 
@@ -92,7 +96,7 @@ public class Wallet extends AppCompatActivity {
     }
 
     public void pay(View view) {
-        Wallet.this.startActivity((new Intent(Wallet.this, CodeScaner.class)));
+        Wallet.this.startActivity((new Intent(Wallet.this, CodeScanner.class)));
     }
 
     public void refill(View view) {
@@ -109,9 +113,24 @@ public class Wallet extends AppCompatActivity {
 
 
     public void logout(MenuItem item) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        mAuth.signOut();
-        startActivity(new Intent(Wallet.this, Login.class)); //Go back to home page
+        new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom))
+                .setCancelable(false)
+                .setTitle("Logout")
+                .setMessage("Would you like to logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // logout
+                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                        mAuth.signOut();
+                        startActivity(new Intent(Wallet.this, Login.class)); //Go back to home page
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // user doesn't want to logout
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -126,5 +145,28 @@ public class Wallet extends AppCompatActivity {
             Intent intent = new Intent(Wallet.this, Login.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom))
+                .setCancelable(false)
+                .setTitle("Exit")
+                .setMessage("Would you like to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // logout
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // user doesn't want to logout
+                    }
+                })
+                .show();
     }
 }

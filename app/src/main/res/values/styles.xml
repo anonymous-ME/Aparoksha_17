@@ -24,7 +24,7 @@
         <item name="android:textColorPrimary">#FFFFFF</item>
         <item name="android:padding">5dp</item>
         <!-- Used for the background -->
-        <item name="android:background">@color/bg</item>
+        <item name="android:background">#323232</item>
     </style>
 
 </resources>

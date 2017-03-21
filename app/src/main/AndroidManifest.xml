@@ -22,7 +22,7 @@
         <activity android:name=".activities.Wallet" />
         <activity
             android:parentActivityName=".activities.Wallet"
-            android:name=".utils.CodeScaner" />
+            android:name=".utils.CodeScanner" />
         <activity android:name=".activities.PayID"
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.EntryPass"

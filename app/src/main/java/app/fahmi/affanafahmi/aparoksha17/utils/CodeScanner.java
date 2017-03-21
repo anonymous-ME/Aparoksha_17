@@ -26,13 +26,13 @@ import app.fahmi.affanafahmi.aparoksha17.activities.Wallet;
 import app.fahmi.affanafahmi.aparoksha17.model.Ticket;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class CodeScaner extends Activity implements ZXingScannerView.ResultHandler {
+public class CodeScanner extends Activity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView mScannerView;
     private DatabaseReference mDatabase;
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
-        Permission.requestPermission(CodeScaner.this,Permission.CAMERA);
+        Permission.requestPermission(CodeScanner.this,Permission.CAMERA);
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
         setContentView(mScannerView);                // Set the scanner view as the content view
         setTitle("IIITA PAY");
@@ -71,7 +71,7 @@ public class CodeScaner extends Activity implements ZXingScannerView.ResultHandl
                 isUpdated = true;
             }
         });
-        final ProgressDialog Dialog = new ProgressDialog(CodeScaner.this,ProgressDialog.THEME_HOLO_DARK);
+        final ProgressDialog Dialog = new ProgressDialog(CodeScanner.this,ProgressDialog.THEME_HOLO_DARK);
         Dialog.setMessage("Booking Your Ticket...");
         Dialog.show();
         Handler mHandler = new Handler(Looper.getMainLooper());
@@ -87,13 +87,13 @@ public class CodeScaner extends Activity implements ZXingScannerView.ResultHandl
                             @Override
                             public void onDataChange(DataSnapshot snapshot) {
                                 if (snapshot.hasChild(str[0])) {
-                                    Toast.makeText(CodeScaner.this, "You have already bought tickets for this event!! ", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(CodeScanner.this, "You have already bought tickets for this event!! ", Toast.LENGTH_LONG).show();
                                     Bundle data = new Bundle();
                                     data.putString("event_name", str[0]);
                                     data.putString("date", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
                                     data.putString("amt", str[1] + "  ₹");
                                     Ticket tkt = new Ticket(result.getText()+"_"+user.getUid(), str[0], Double.parseDouble(str[1]), new Date());
-                                    CodeScaner.this.startActivity(new Intent(CodeScaner.this, EntryPass.class).putExtras(data));
+                                    CodeScanner.this.startActivity(new Intent(CodeScanner.this, EntryPass.class).putExtras(data));
                                 }else{
                                     Bundle data = new Bundle();
                                     data.putString("event_name", str[0]);
@@ -104,7 +104,7 @@ public class CodeScaner extends Activity implements ZXingScannerView.ResultHandl
                                     mDatabase.child("users").child(user.getUid()).child("Tickets").child(str[0]).setValue(tkt);
                                     mDatabase.child("users").child(user.getUid()).child("wallet_balance").setValue( round( ((bal-(Double.parseDouble(str[1])))) , 2 ) );
 
-                                    CodeScaner.this.startActivity(new Intent(CodeScaner.this, EntryPass.class).putExtras(data));
+                                    CodeScanner.this.startActivity(new Intent(CodeScanner.this, EntryPass.class).putExtras(data));
                                     SendSMS.sendSms(str[0],str[2],user.getEmail(),str[1]);
                                     Dialog.hide();
                                 }
@@ -119,12 +119,12 @@ public class CodeScaner extends Activity implements ZXingScannerView.ResultHandl
 
 
                     }else{
-                        Toast.makeText(CodeScaner.this, "Your balance is too low to make this purchase.", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(CodeScaner.this, Wallet.class));
+                        Toast.makeText(CodeScanner.this, "Your balance is too low to make this purchase.", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(CodeScanner.this, Wallet.class));
                     }
                 }catch (Exception e){
-                    Toast.makeText(CodeScaner.this, "Invalid Event QR Code!! ", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(CodeScaner.this, Wallet.class));
+                    Toast.makeText(CodeScanner.this, "Invalid Event QR Code!! ", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(CodeScanner.this, Wallet.class));
                 }
             }
         });
